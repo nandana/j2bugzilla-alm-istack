@@ -7,10 +7,10 @@
   </parent>
   
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.j2bugzilla.almistack</groupId>
-  <artifactId>j2bugzilla</artifactId>
-  <version>2.2.1-SNAPSHOT</version>
-  <name>J2Bugzilla</name>
+  <groupId>com.j2bugzilla</groupId>
+  <artifactId>almistack-j2bugzilla</artifactId>
+  <version>2.2-SNAPSHOT</version>
+  <name>J2Bugzilla Fork</name>
   
   <description>A forked version of the J2Bugzilla library for accessing Bugzilla installations in Java</description>
   <dependencies>
@@ -72,6 +72,11 @@
   <profiles>
   	<profile>
   		<id>integration-test</id>
+  		 <activation>
+      		<property>
+        		<name>it</name>
+      		</property>
+    	</activation>
   		<build>
   			<plugins>
   				<plugin>
@@ -150,11 +155,36 @@
   	</plugins>
   </build>
   
+  	<!-- Project license -->
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+			<comments>A business-friendly OSS license</comments>
+		</license>
+	</licenses>
+  
   <scm>
     <connection>scm:git:https://github.com/nandana/j2bugzilla-alm-istack.git</connection>
     <developerConnection>scm:git:https://github.com/nandana/j2bugzilla-alm-istack.git</developerConnection>
     <url>https://github.com/nandana/j2bugzilla-alm-istack/</url>
   </scm>
+  
+  <distributionManagement>
+		<repository>
+			<uniqueVersion>false</uniqueVersion>
+			<id>alm-istack-externals-releases-deploy-server</id>
+			<name>ALM iStack Releases Repository</name>
+			<url>http://www.development.seals-project.eu/artifactory/libs-releases-local/</url>
+		</repository>
+		<snapshotRepository>
+			<uniqueVersion>false</uniqueVersion>
+			<id>alm-istack-externals-snapshots-deploy-server</id>
+			<name>ALM iStack Snapshots Repository</name>
+			<url>http://www.development.seals-project.eu/artifactory/libs-snapshots-local/</url>
+		</snapshotRepository>
+  </distributionManagement>
   
   <url>https://github.com/nandana/j2bugzilla-alm-istack/</url>
 </project>

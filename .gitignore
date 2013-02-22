@@ -1,6 +1,7 @@
 .hg/
 .settings/
 target/
+.svn
 /.hgtags
 /.project
 /.classpath

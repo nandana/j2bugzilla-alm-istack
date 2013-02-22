@@ -172,6 +172,36 @@ public class BugzillaConnector {
 	}
 	
 	/**
+	 * Use this method to check whether the {@code BugzillaConnector} is already connected to a 
+	 * Bugzilla instance. If the {@code BugzillaConnector} is already connected to a Bugzilla instance
+	 * using {@link BugzillaConnector#connectTo(String, String, String)} or 
+	 * {@link BugzillaConnector#connectTo(URL, String, String)} this method will return true.
+	 * @return true if connected to a Bugzilla instance 
+	 */
+	public boolean isConnected() {
+		if (client == null) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	/**
+	 * Use this method to check whether the 
+	 * @return
+	 */
+	public boolean isLoggedIn() {
+		if (client == null) {
+			return false;
+		}
+		XmlRpcTransportFactory factory = client.getTransportFactory();
+		TransportWithCookies transport = (TransportWithCookies) factory.getTransport();
+		
+		return false;
+		
+	}
+	
+	/**
 	 * We need a transport class which will correctly handle cookies set by Bugzilla. This private
 	 * subclass will appropriately set the Cookie HTTP headers.
 	 * 
@@ -240,6 +270,7 @@ public class BugzillaConnector {
 	    	  }
 	    	  
 	    }
+		
 		
 	}
 }
