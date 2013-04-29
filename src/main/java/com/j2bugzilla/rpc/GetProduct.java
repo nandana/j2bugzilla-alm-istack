@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.j2bugzilla.base.BugzillaMethod;
+import com.j2bugzilla.base.Component;
 import com.j2bugzilla.base.Product;
 import com.j2bugzilla.base.ProductVersion;
 
@@ -75,6 +76,16 @@ public class GetProduct implements BugzillaMethod {
 				ProductVersion productVersion = new ProductVersion((Integer)versionMap.get("id"), 
 						(String)versionMap.get("name"));
 				product.addProductVersion(productVersion);
+			}
+		}
+		
+		if(prodMap.get("components") != null) {
+			Object[] components = (Object[]) prodMap.get("components");
+			for(Object component : components){
+				Map<Object,Object> componentMap = (Map<Object, Object>) component;
+				Component productComponent = new Component((Integer) componentMap.get("id"), 
+						(String) componentMap.get("name"));
+				product.addComponent(productComponent);
 			}
 		}
 		

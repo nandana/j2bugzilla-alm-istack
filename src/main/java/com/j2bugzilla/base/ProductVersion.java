@@ -24,6 +24,8 @@ package com.j2bugzilla.base;
  */
 public class ProductVersion {
 	
+	public static final int INVALID_ID = -1;
+	
 	private final int id;
 	
 	private final String name;

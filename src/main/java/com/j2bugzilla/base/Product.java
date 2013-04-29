@@ -17,7 +17,9 @@ package com.j2bugzilla.base;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * A {@code Product} object represents a product category on the Bugzilla installation. Each product
@@ -34,8 +36,11 @@ public class Product {
 	
 	private String description;
 	
+	private String defaultVersion;
+	
 	private List<ProductVersion> versions = new ArrayList<ProductVersion>();
 	
+	private List<Component> components = new ArrayList<Component>();
 	/**
 	 * Creates a new {@link Product} object with the specified unique ID and name.
 	 * @param id An {@code integer} representing the unique product ID.
@@ -88,12 +93,59 @@ public class Product {
 		return description;
 	}
 	
+	/**
+	 * Adds a {@link ProductVersion} to a product
+	 * @param version product version to be added
+	 */
 	public void addProductVersion(ProductVersion version) {
 		versions.add(version);
 	}
 	
+	/**
+	 * Adds a {@link Component} to a product
+	 * @param component the component to be added
+	 */
+	public void addComponent(Component component) {
+		components.add(component);
+	}
+	
+	/**
+	 * Sets the default version of the product
+	 * @param version
+	 */
+	public void setDefaultProductVersion (String version) {
+		this.defaultVersion = version;
+	}
+	
+	/***
+	 * Gets a read-only copy of product versions.
+	 * @return list of product versions.
+	 */
 	public List<ProductVersion> getProductVersions() {
 		return Collections.unmodifiableList(versions);
+	}
+	
+	/**
+	 * Gets a read-only copy of product components.
+	 * @return list of product components.
+	 */
+	public List<Component> getComponents() {
+		return Collections.unmodifiableList(components);
+	}
+	
+	/**
+	 * Used when a representation of this {@link Product Product's} internals must be passed via
+	 * XML-RPC for a remote method. Regular users of this API should prefer the normal
+	 * {@code getXxx()} methods.
+	 * @return A read-only {@code Map} of key-value pairs corresponding to this {@code Product's} properties.
+	 */
+	public Map<Object, Object> getParameterMap() {
+		Map<Object, Object> params = new HashMap<Object, Object>();
+		params.put("name", name);
+		params.put("description", description);
+		params.put("version", defaultVersion);
+
+		return Collections.unmodifiableMap(params);
 	}
 	
 }
